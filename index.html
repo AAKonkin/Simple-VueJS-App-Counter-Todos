@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="theme.css">
+    <title>Simple Vue.js App</title>
+    <style>
+        /* Style for corected start render {{counter}} and other inter */
+        [v-cloak]{ display: none } 
+    </style>
+</head>
+<body>
+    <div v-cloak id="app" class="container pt-5">
+        <div class="card center">
+            <h2>{{ counterTitle }}&nbsp;<span :class="[{'textPrimary': counter > 0}, {'textDanger': counter < 0}]">{{ counter }}</span></h2>
+            <div>
+                <button class="btn primary" @click='increment'>Increment</button>
+                <button class="btn danger" @click='decrement'>Decrement</button>
+            </div>
+        </div>
+        <div class="card">
+            <h1 class="center">Todo List with Vue.js</h1>
+            <div class="forInput" @keyPress.enter='addNewTodo'>
+                <input class='inpStyle' maxlength="65" type="text" 
+                    :placeholder='todoPlaceHolder' :value='inputValue'
+                    @input='inputChange'
+                />
+                <button class="btn warning" @click='addNewTodo'>Add task</button>
+            </div>
+            <ul class="list" v-if='todos.length !== 0'>
+                <li class="list-item item" v-for='(todo, i) in todos'>
+                    <span>{{i+1}})&nbsp;{{ todo }}</span>
+                    <button class="btn warning" @click='deleteTodo(i)'>Delete</button>
+                </li>
+            </ul>
+            <div class="center pt-1" v-else>
+                <h3>You dont have task :( You can add a few :)</h3>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="app.js"></script>
+</body>
+</html>
